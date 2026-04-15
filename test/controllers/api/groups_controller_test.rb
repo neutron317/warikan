@@ -18,6 +18,15 @@ class Api::GroupsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "飲み会", json["name"]
   end
 
+  test "合計金額を指定してグループを作成できる" do
+    post "/api/groups",
+      params: { group: { name: "飲み会", total_amount: 10000 } },
+      as: :json
+    assert_response :created
+    json = JSON.parse(response.body)
+    assert_equal 10000, json["total_amount"]
+  end
+
   test "名前が空なら作成できない" do
     post "/api/groups",
       params: { group: { name: "" } },
