@@ -5,5 +5,5 @@
 Group.create!(name: "旅行", total_amount: 50000)
 Group.create!(name: "飲み会", total_amount: 15000)
 Group.create!(name: "BBQ", total_amount: 8000)
-Group.create!(name: "ランチ")
-Group.create!(name: "カラオケ")
+Group.create!(name: "ランチ", total_amount: 0)
+Group.create!(name: "カラオケ", total_amount: 0)
