@@ -17,14 +17,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_15_071412) do
   create_table "groups", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
-    t.integer "total_amount"
     t.datetime "updated_at", null: false
   end
 
   create_table "members", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.bigint "group_id", null: false
-    t.string "name"
+    t.string "name", default: "", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_members_on_group_id"
   end
