@@ -30,5 +30,4 @@ class GroupTest < ActiveSupport::TestCase
     group = Group.new(name: "テスト旅行", total_amount: -1)
     assert_not group.valid?
   end
-
 end
