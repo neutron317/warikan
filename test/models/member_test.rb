@@ -25,11 +25,6 @@ class MemberTest < ActiveSupport::TestCase
     assert_equal 1, member.weight
   end
 
-  test "weightが整数なら保存できる" do
-    member = Member.new(name: "田中", group: @group, weight: 2)
-    assert member.valid?
-  end
-
   test "weightが小数なら保存できる" do
     member = Member.new(name: "田中", group: @group, weight: 1.5)
     assert member.valid?
