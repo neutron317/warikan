@@ -36,11 +36,4 @@ class PaymentTest < ActiveSupport::TestCase
     payment = Payment.new(member: @member, amount: 5000)
     assert_not payment.valid?
   end
-
-  test "別グループのメンバーでは保存できない" do
-    other_group  = Group.create!(name: "別グループ", total_amount: 0)
-    other_member = Member.create!(name: "山田", group: other_group)
-    payment = Payment.new(group: @group, member: other_member, amount: 3000)
-    assert_not payment.valid?
-  end
 end

@@ -7,7 +7,7 @@ class Api::PaymentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "支払い一覧を取得できる" do
-    Payment.create!(group: @group, member: @member, amount: 20000)
+    Payment.create!(member: @member, amount: 20000)
     get "/api/groups/#{@group.id}/payments"
     assert_response :success
     json = JSON.parse(response.body)
