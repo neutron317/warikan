@@ -21,3 +21,16 @@ Member.create!(name: "渡辺", group: bbq)
 Member.create!(name: "中村", group: bbq)
 Member.create!(name: "小林", group: bbq)
 Member.create!(name: "加藤", group: bbq)
+
+# 支払い
+tanaka  = Member.find_by!(name: "田中", group: ryoko)
+suzuki  = Member.find_by!(name: "鈴木", group: ryoko)
+sato    = Member.find_by!(name: "佐藤", group: ryoko)
+Payment.create!(member: tanaka, amount: 20000)
+Payment.create!(member: suzuki, amount: 15000)
+Payment.create!(member: sato,   amount: 15000)
+
+yamada = Member.find_by!(name: "山田", group: nomikai)
+ito    = Member.find_by!(name: "伊藤", group: nomikai)
+Payment.create!(member: yamada, amount: 8000)
+Payment.create!(member: ito,    amount: 7000)
