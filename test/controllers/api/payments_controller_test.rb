@@ -38,8 +38,6 @@ class Api::PaymentsControllerTest < ActionDispatch::IntegrationTest
     post "/api/groups/#{@group.id}/payments",
       params: { payment: { member_id: other_member.id, amount: 5000 } },
       as: :json
-    assert_response :unprocessable_entity
-    json = JSON.parse(response.body)
-    assert json["errors"].present?
+    assert_response :not_found
   end
 end

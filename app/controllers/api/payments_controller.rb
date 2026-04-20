@@ -6,12 +6,8 @@ module Api
     end
 
     def create
-      group  = Group.find(params[:group_id])
-      member = group.members.find_by(id: payment_params[:member_id])
-      if member.nil?
-        render json: { errors: [ "メンバーはこのグループに属していません" ] }, status: :unprocessable_entity
-        return
-      end
+      group   = Group.find(params[:group_id])
+      member  = group.members.find(payment_params[:member_id])
       payment = member.build_payment(amount: payment_params[:amount])
       if payment.save
         render json: payment, status: :created
