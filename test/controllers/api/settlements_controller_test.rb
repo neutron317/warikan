@@ -15,15 +15,10 @@ class Api::SettlementsControllerTest < ActionDispatch::IntegrationTest
     get "/api/groups/#{@group.id}/settlements"
     assert_response :success
     json = JSON.parse(response.body)
-    assert json.all? { |s| s.key?("from") && s.key?("to") && s.key?("amount") }
-    assert json.any? { |s| s["to"] == "田中" }
-  end
-
-  test "concentrated_onを指定すると端数がそのメンバーに集中する" do
-    get "/api/groups/#{@group.id}/settlements?concentrated_on=#{@sato.id}"
-    assert_response :success
-    json = JSON.parse(response.body)
-    sato_payment = json.find { |s| s["from"] == "佐藤" }
-    assert_not_nil sato_payment
+    assert json.key?("settlements")
+    assert json.key?("remainder")
+    assert json.key?("losers")
+    assert json["settlements"].all? { |s| s.key?("from") && s.key?("to") && s.key?("amount") }
+    assert json["settlements"].any? { |s| s["to"] == "田中" }
   end
 end
