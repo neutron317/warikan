@@ -6,9 +6,7 @@ class Member < ApplicationRecord
   validates :weight, numericality: { greater_than: 0 }
 
   def amount_due
-    return 0 if group.total_amount.zero?
-    total_weight = group.members.sum(:weight)
-    (weight / total_weight) * group.total_amount
+    (weight * group.total_amount / group.members.sum(:weight)).to_i
   end
 
   def as_json(options = {})
