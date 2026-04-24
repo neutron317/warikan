@@ -18,7 +18,7 @@ module Api
     private
 
     def member_params
-      params.require(:member).permit(:name)
+      params.require(:member).permit(:name, :weight)
     end
   end
 end
