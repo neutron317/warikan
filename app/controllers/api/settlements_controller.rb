@@ -5,7 +5,7 @@ module Api
       result = group.settlements
       render json: {
         settlements: result[:settlements].map { |s|
-          { from: s[:from].name, to: s[:to].name, amount: s[:amount] }
+          { from_id: s[:from].id, to_id: s[:to].id, amount: s[:amount] }
         },
         remainder: result[:remainder],
         losers: result[:losers].map { |l| { name: l[:member].name, amount: l[:amount] } }
