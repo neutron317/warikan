@@ -20,6 +20,16 @@ class Api::MembersControllerTest < ActionDispatch::IntegrationTest
     assert_equal "田中", json["name"]
   end
 
+  test "weightを指定してメンバーを作成できる" do
+    group = Group.create!(name: "旅行", total_amount: 50000)
+    post "/api/groups/#{group.id}/members",
+      params: { member: { name: "田中", weight: 2 } },
+      as: :json
+    assert_response :created
+    json = JSON.parse(response.body)
+    assert_equal "2.0", json["weight"]
+  end
+
   test "名前が空なら作成できない" do
     group = Group.create!(name: "旅行", total_amount: 50000)
     post "/api/groups/#{group.id}/members",

@@ -10,9 +10,9 @@ Group.create!(name: "ランチ", total_amount: 0)
 Group.create!(name: "カラオケ", total_amount: 0)
 
 # メンバー
-Member.create!(name: "田中", group: ryoko)
-Member.create!(name: "鈴木", group: ryoko)
-Member.create!(name: "佐藤", group: ryoko)
+Member.create!(name: "田中", group: ryoko, weight: 2)  # 2倍負担
+Member.create!(name: "鈴木", group: ryoko, weight: 1)
+Member.create!(name: "佐藤", group: ryoko, weight: 1)
 
 Member.create!(name: "山田", group: nomikai)
 Member.create!(name: "伊藤", group: nomikai)
