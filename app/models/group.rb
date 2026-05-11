@@ -17,20 +17,27 @@ class Group < ApplicationRecord
     creditors = balances.select { |b| b[:balance] > 0 }.map(&:dup)
     debtors   = balances.select { |b| b[:balance] < 0 }.map(&:dup)
 
-    result = []
-    i = j = 0
-    while i < creditors.length && j < debtors.length
-      amount = [ creditors[i][:balance], -debtors[j][:balance] ].min
-      result << { from: debtors[j][:member], to: creditors[i][:member], amount: amount }
-      creditors[i][:balance] -= amount
-      debtors[j][:balance]   += amount
-      i += 1 if creditors[i][:balance] <= 0
-      j += 1 if debtors[j][:balance] >= 0
-    end
+    result = build_settlements(creditors, debtors)
 
     losers = creditors.select { |c| c[:balance] > 0 }
                       .map { |c| { member: c[:member], amount: c[:balance] } }
 
     { settlements: result, remainder: remainder, losers: losers }
+  end
+
+  private
+
+  def build_settlements(creditors, debtors, result = [])
+    return result if creditors.empty? || debtors.empty?
+
+    amount = [ creditors.first[:balance], -debtors.first[:balance] ].min
+    result << { from: debtors.first[:member], to: creditors.first[:member], amount: amount }
+    creditors.first[:balance] -= amount
+    debtors.first[:balance]   += amount
+
+    creditors.shift if creditors.first[:balance] <= 0
+    debtors.shift   if debtors.first[:balance] >= 0
+
+    build_settlements(creditors, debtors, result)
   end
 end
