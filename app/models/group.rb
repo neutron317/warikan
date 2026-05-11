@@ -11,7 +11,7 @@ class Group < ApplicationRecord
 
     balances = members.map do |member|
       paid = member.payment&.amount || 0
-      { member: member, balance: paid - dues[member] }
+      { member: , balance: paid - dues[member] }
     end
 
     creditors = balances.select { |b| b[:balance] > 0 }.map(&:dup)
