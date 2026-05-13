@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :groups, only: [ :index, :create, :show ] do
       resources :members, only: [ :index, :create ]
       resources :payments, only: [ :index, :create ]
+      resources :settlements, only: [ :index ]
     end
   end
 end
