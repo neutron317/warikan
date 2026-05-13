@@ -20,5 +20,6 @@ class Api::SettlementsControllerTest < ActionDispatch::IntegrationTest
     assert json.key?("losers")
     assert json["settlements"].all? { |s| s.key?("from_id") && s.key?("to_id") && s.key?("amount") }
     assert json["settlements"].any? { |s| s["to_id"] == @tanaka.id }
+    assert json["losers"].all? { |l| l.key?("member_id") && l.key?("amount") }
   end
 end

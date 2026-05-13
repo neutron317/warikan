@@ -8,7 +8,7 @@ module Api
           { from_id: s[:from].id, to_id: s[:to].id, amount: s[:amount] }
         },
         remainder: result[:remainder],
-        losers: result[:losers].map { |l| { name: l[:member].name, amount: l[:amount] } }
+        losers: result[:losers].map { |l| { member_id: l[:member].id, amount: l[:amount] } }
       }
     end
   end
